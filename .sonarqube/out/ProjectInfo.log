@@ -1,0 +1,28 @@
+Product projects
+---------------------------------------
+C:\Developpement\GoColis\GoColis.Shipping\GoColis.Shipping.Domain\GoColis.Shipping.Domain.csproj
+C:\Developpement\GoColis\GoColis.Shipping\GoColis.Shipping.Application\GoColis.Shipping.Application.csproj
+C:\Developpement\GoColis\GoColis.Shipping\GoColis.Shipping.Infrastructure\GoColis.Shipping.Infrastructure.csproj
+C:\Developpement\GoColis\GoColis.Shipping\GoColis.Shipping.API\GoColis.Shipping.Api.csproj
+
+
+Test projects
+---------------------------------------
+C:\Developpement\GoColis\GoColis.Shipping\Tests\GoColis.Shipping.Api.IntegrationTests\GoColis.Shipping.Api.IntegrationTests.csproj
+
+
+Invalid projects
+---------------------------------------
+{none}
+
+
+Skipped projects
+---------------------------------------
+{none}
+
+
+Excluded projects
+---------------------------------------
+{none}
+
+

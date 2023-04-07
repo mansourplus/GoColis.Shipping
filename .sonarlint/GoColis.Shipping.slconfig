@@ -1,0 +1,16 @@
+{
+  "ServerUri": "http://localhost:9000/",
+  "Organization": null,
+  "ProjectKey": "GoColis",
+  "ProjectName": "GoColis",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AYdZlfu1tzr0LOtN1xO4",
+      "ProfileTimestamp": "2023-04-07T02:40:14Z"
+    },
+    "Secrets": {
+      "ProfileKey": "AYdZlfkNtzr0LOtN1xDi",
+      "ProfileTimestamp": "2023-04-07T02:40:13Z"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoColis.Shipping.Api", "GoColis.Shipping.API\GoColis.Shipping.Api.csproj", "{5B3348EF-ED94-43A1-8C4C-3D62652C6BB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoColis.Shipping.Domain", "GoColis.Shipping.Domain\GoColis.Shipping.Domain.csproj", "{91595803-C833-4365-A220-1BFC07F61A9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoColis.Shipping.Infrastructure", "GoColis.Shipping.Infrastructure\GoColis.Shipping.Infrastructure.csproj", "{7B4BF6F2-BB2F-4768-BC11-08810FCB93A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoColis.Shipping.Application", "GoColis.Shipping.Application\GoColis.Shipping.Application.csproj", "{E71C49EA-B38B-4445-A6A8-1A9A476AB470}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9A8FBB91-C186-4DEC-B3C7-74099756B41A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoColis.Shipping.Api.IntegrationTests", "Tests\GoColis.Shipping.Api.IntegrationTests\GoColis.Shipping.Api.IntegrationTests.csproj", "{BD13DA0B-4A87-4428-BCB0-7E54A5396AE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B3348EF-ED94-43A1-8C4C-3D62652C6BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3348EF-ED94-43A1-8C4C-3D62652C6BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3348EF-ED94-43A1-8C4C-3D62652C6BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3348EF-ED94-43A1-8C4C-3D62652C6BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91595803-C833-4365-A220-1BFC07F61A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91595803-C833-4365-A220-1BFC07F61A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91595803-C833-4365-A220-1BFC07F61A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91595803-C833-4365-A220-1BFC07F61A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B4BF6F2-BB2F-4768-BC11-08810FCB93A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B4BF6F2-BB2F-4768-BC11-08810FCB93A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B4BF6F2-BB2F-4768-BC11-08810FCB93A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4BF6F2-BB2F-4768-BC11-08810FCB93A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E71C49EA-B38B-4445-A6A8-1A9A476AB470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71C49EA-B38B-4445-A6A8-1A9A476AB470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71C49EA-B38B-4445-A6A8-1A9A476AB470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71C49EA-B38B-4445-A6A8-1A9A476AB470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD13DA0B-4A87-4428-BCB0-7E54A5396AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD13DA0B-4A87-4428-BCB0-7E54A5396AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD13DA0B-4A87-4428-BCB0-7E54A5396AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD13DA0B-4A87-4428-BCB0-7E54A5396AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD13DA0B-4A87-4428-BCB0-7E54A5396AE7} = {9A8FBB91-C186-4DEC-B3C7-74099756B41A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DCCF04AB-9839-4D69-A632-35B9712D8BEC}
+	EndGlobalSection
+EndGlobal

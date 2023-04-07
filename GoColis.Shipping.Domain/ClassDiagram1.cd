@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GoColis.Shipping.Domain.Member.Person.Person">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABAAAAAAAAAgAAAAAAAAAAAAgAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Member\Person\Person.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Adress" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Contacts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Member.Customer.Customer">
+    <Position X="1.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAg=</HashCode>
+      <FileName>Member\Customer\Customer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Person" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Member.Carrier.Carrier">
+    <Position X="3.5" Y="5" Width="1.5" />
+    <AssociationLine Name="Person" Type="GoColis.Shipping.Domain.Member.Person.Person" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.125" Y="5" />
+        <Point X="4.125" Y="4.312" />
+        <Point X="5.75" Y="4.312" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="RelayPoints" Type="GoColis.Shipping.Domain.Logistics.RelayPoint.RelayPoint" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="7.443" />
+        <Point X="5.375" Y="7.443" />
+        <Point X="5.375" Y="8.438" />
+        <Point X="8.25" Y="8.438" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.01" Y="0.068" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAEDAABAAAAAAAAAAAAQAgAAAAEAAAAAIAAAAAAA=</HashCode>
+      <FileName>Member\Carrier\Carrier.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Person" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="RelayPoints" />
+      <Property Name="RelayPointPrices" />
+      <Property Name="PaymentMethods" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Member.Carrier.Entities.RelayPointPrice">
+    <Position X="3.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAAAIAAAAAAAAAAAAABAAAEAAgAAABAAAAAA=</HashCode>
+      <FileName>Member\Carrier\Entities\RelayPointPrice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RelayPoint" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Common.Entities.Adress" Collapsed="true">
+    <Position X="9.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAIAAAIAAAAAAIAAEABAAIAAAAQAAA=</HashCode>
+      <FileName>Common\Entities\Adress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Common.Entities.Contact" Collapsed="true">
+    <Position X="7.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAEAAAAAAAAAAAAEAAAAAAIAAAAAg=</HashCode>
+      <FileName>Common\Entities\Contact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Common.Entities.Photo">
+    <Position X="14.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAEAACAAAAAAAAAA=</HashCode>
+      <FileName>Common\Entities\Photo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Authentication.Entities.User">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Authentication\Entities\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.Order.Order">
+    <Position X="11.5" Y="6" Width="1.5" />
+    <AssociationLine Name="Sender" Type="GoColis.Shipping.Domain.Member.Person.Person" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.51" Y="6" />
+        <Point X="12.51" Y="3.75" />
+        <Point X="7.25" Y="3.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Receiver" Type="GoColis.Shipping.Domain.Member.Person.Person" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.974" Y="6" />
+        <Point X="11.974" Y="4.188" />
+        <Point X="7.25" Y="4.188" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Insurance" Type="GoColis.Shipping.Domain.Logistics.Insurance.Insurance" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13" Y="9.845" />
+        <Point X="17.75" Y="9.845" />
+        <Point X="17.75" Y="10.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Carrier" Type="GoColis.Shipping.Domain.Member.Carrier.Carrier" FixedFromPoint="true">
+      <Path>
+        <Point X="11.5" Y="6.724" />
+        <Point X="9.583" Y="6.724" Type="JumpStart" />
+        <Point X="9.417" Y="6.724" Type="JumpEnd" />
+        <Point X="8.583" Y="6.724" Type="JumpStart" />
+        <Point X="8.417" Y="6.724" Type="JumpEnd" />
+        <Point X="5" Y="6.724" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CAAhJgAACEBOAGAAhAYQAICAAAAECEIAACAAQAAIQAA=</HashCode>
+      <FileName>Logistics\Order\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Sender" />
+      <Property Name="Receiver" />
+      <Property Name="Insurance" />
+      <Property Name="Carrier" />
+      <Property Name="PickupPoint" />
+      <Property Name="RelayPoint" />
+      <Property Name="Package" />
+      <Property Name="PaymentMethod" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Payments" />
+      <Property Name="Photos" />
+      <Property Name="Tracks" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.Order.Entities.Item">
+    <Position X="19.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAgAAAAAAAAAAQAAAAAAEAAAAAAgAAAAAA=</HashCode>
+      <FileName>Logistics\Order\Entities\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.Order.Entities.Package">
+    <Position X="16.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAEAgCAAAAAAAAAAAgBgAQEAEAQACAAAAAAA=</HashCode>
+      <FileName>Logistics\Order\Entities\Package.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Type" />
+      <Property Name="Format" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.Order.Entities.Payment">
+    <Position X="11.75" Y="13" Width="1.5" />
+    <AssociationLine Name="PaymentMethod" Type="GoColis.Shipping.Domain.Payment.PaymentMethod.PaymentMethod" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="14.438" />
+        <Point X="4.75" Y="14.438" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAEAAAAAAAAAAACAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logistics\Order\Entities\Payment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PaymentMethod" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.RelayPoint.RelayPoint">
+    <Position X="8.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAABAAAAACAAAAAAAggAAQAQAgAAEAAAAAAAAAACAA=</HashCode>
+      <FileName>Logistics\RelayPoint\RelayPoint.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Adress" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Contacts" />
+      <Property Name="RelayPointSchedules" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.RelayPoint.Entities.RelayPointSchedule">
+    <Position X="5.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAgAEAAAAAEAAAAAAA=</HashCode>
+      <FileName>Logistics\RelayPoint\Entities\RelayPointSchedule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Payment.PaymentMethod.PaymentMethod">
+    <Position X="3.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAQIAAEAAAAAQAAACAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Payment\PaymentMethod\PaymentMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.Insurance.Insurance">
+    <Position X="17" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAQAAAgAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logistics\Insurance\Insurance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.Order.ValuesObjects.Format">
+    <Position X="20" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEBAACAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Logistics\Order\ValuesObjects\Format.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoColis.Shipping.Domain.Logistics.Order.Entities.Track">
+    <Position X="14.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAgAAAAAgAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logistics\Order\Entities\Track.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Process" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="GoColis.Shipping.Domain.Logistics.Order.ValuesObjects.PackageType">
+    <Position X="16.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAQAAAAAAABAAACQQAAA=</HashCode>
+      <FileName>Logistics\Order\ValuesObjects\PackageType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GoColis.Shipping.Domain.Logistics.Order.ValuesObjects.ShippingProcess">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAQAAAKAAAAABAAAAAABCEA=</HashCode>
+      <FileName>Logistics\Order\ValuesObjects\ShippingProcess.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
