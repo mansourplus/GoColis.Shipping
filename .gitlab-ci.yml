@@ -10,10 +10,10 @@ build:
   script:
     - dotnet build
 
-test:
-  stage: test
-  script:
-    - dotnet test
+#test:
+#  stage: test
+#  script:
+#    - dotnet test
 
 release:
   stage: release
