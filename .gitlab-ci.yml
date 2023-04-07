@@ -26,4 +26,8 @@ before_script:
 build:
   only:
     - master
+  stage: build
+  script:
+    - echo "Compiling the code..."
+    - echo "Compile complete."
 
