@@ -17,7 +17,7 @@ test:
     - dotnet test
 
 sonarqube-check:
-  stage: test
+  stage: soanr
   #image: mcr.microsoft.com/dotnet/core/sdk:latest
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
