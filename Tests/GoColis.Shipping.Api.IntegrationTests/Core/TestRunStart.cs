@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-[assembly: Xunit.TestFramework("GoColis.Shipping.Api.IntegrationTests.TestRunStart", "GoColis.Shipping.Api.IntegrationTests")]
-namespace GoColis.Shipping.Api.IntegrationTests;
+[assembly: TestFramework("GoColis.Shipping.Api.IntegrationTests.TestRunStart", "GoColis.Shipping.Api.IntegrationTests")]
+namespace GoColis.Shipping.Api.IntegrationTests.Core;
 
 public class TestRunStart : XunitTestFramework
 {

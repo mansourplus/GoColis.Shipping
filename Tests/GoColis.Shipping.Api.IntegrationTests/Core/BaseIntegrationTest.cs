@@ -9,11 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-//using Microsoft.AspNetCore.Mvc.Testing;
-//using Microsoft.VisualStudio.TestPlatform.TestHost;
-//using System.Net;
 
-namespace GoColis.Shipping.Api.IntegrationTests;
+namespace GoColis.Shipping.Api.IntegrationTests.Core;
 
 public class BaseIntegrationTest : WebApplicationFactory<Program>
 {
@@ -30,11 +27,13 @@ public class BaseIntegrationTest : WebApplicationFactory<Program>
 
     protected WebApplicationFactory<Program> GetApplication()
     {
-        return new WebApplicationFactory<Program>().WithWebHostBuilder(builder => {
+        return new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
+        {
 
             ConfigureWebHost(builder);
 
-            builder.ConfigureTestServices(services => {
+            builder.ConfigureTestServices(services =>
+            {
                 var options = new DbContextOptionsBuilder<DatabaseContext>()
                                 .UseSqlServer(TestingConstants.SqlConnection)
                                 .Options;
@@ -56,10 +55,10 @@ public class BaseIntegrationTest : WebApplicationFactory<Program>
         });
     }
 
-    private  void ConfigureWebHost(IWebHostBuilder builder)
+    private void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(ConfigureServices);
-        builder.ConfigureLogging((WebHostBuilderContext context, ILoggingBuilder loggingBuilder) =>
+        builder.ConfigureLogging((context, loggingBuilder) =>
         {
             loggingBuilder.ClearProviders();
             loggingBuilder.AddConsole(options => options.IncludeScopes = true);
@@ -77,23 +76,23 @@ public class BaseIntegrationTest : WebApplicationFactory<Program>
         };
         services.AddSingleton(Options.Create(jwtOptions));
 
-       // services.AddAuthentication()
-       //.AddJwtBearer(options =>
-       //{
-       //    options.SaveToken = true;
-       //    options.TokenValidationParameters = new TokenValidationParameters()
-       //    {
-       //        ValidateIssuer = true,
-       //        ValidateAudience = true,
-       //        ValidateIssuerSigningKey = true,
-       //        ValidateLifetime = true,
-       //        ValidAudiences = jwtOptions.ValidAudiences,
-       //        ValidIssuer = jwtOptions.ValidIssuer,
-       //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
+        // services.AddAuthentication()
+        //.AddJwtBearer(options =>
+        //{
+        //    options.SaveToken = true;
+        //    options.TokenValidationParameters = new TokenValidationParameters()
+        //    {
+        //        ValidateIssuer = true,
+        //        ValidateAudience = true,
+        //        ValidateIssuerSigningKey = true,
+        //        ValidateLifetime = true,
+        //        ValidAudiences = jwtOptions.ValidAudiences,
+        //        ValidIssuer = jwtOptions.ValidIssuer,
+        //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
 
 
-       //    };
-       //});
+        //    };
+        //});
     }
 
     private string MockToken()
@@ -115,7 +114,7 @@ public class BaseIntegrationTest : WebApplicationFactory<Program>
             claims: authClaims,
             audience: null,
             issuer: "shippingapp",
-            signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+            signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
             );
 
         return new JwtSecurityTokenHandler().WriteToken(token);

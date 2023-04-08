@@ -1,18 +1,11 @@
+using GoColis.Shipping.Api.IntegrationTests.Core;
+using GoColis.Shipping.Api.Logistics.Common;
 using GoColis.Shipping.Api.Logistics.RelayPoint.Requests.Create;
-using GoColis.Shipping.Application.Authentication.Constants;
-using GoColis.Shipping.Domain.Authentication.Entities;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Newtonsoft.Json.Linq;
 using System.Net;
-using System.Security.Cryptography;
-//using Microsoft.AspNetCore.Mvc.Testing;
-//using Microsoft.VisualStudio.TestPlatform.TestHost;
-//using System.Net;
 
-namespace GoColis.Shipping.Api.IntegrationTests;
+namespace GoColis.Shipping.Api.IntegrationTests.Logistics;
 
-public class UnitTest1 : BaseIntegrationTest
+public class RelayPointTest : BaseIntegrationTest
 {
     [Fact]
     public async Task Test1()
@@ -21,14 +14,14 @@ public class UnitTest1 : BaseIntegrationTest
         var payload = new CreateRelayPointDto
         {
             Name = "Test",
-            Adress = new Logistics.Common.AdressDto
+            Adress = new AdressDto
             {
                 AddressLine1 = "Test"
             },
-            Contact = new Logistics.Common.ContactDto
+            Contact = new ContactDto
             {
                 Email = "Test@mail.fr",
-                Phone="5555555555555555",
+                Phone = "5555555555555555",
                 Role = "Test"
 
             }
