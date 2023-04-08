@@ -5,7 +5,7 @@ namespace GoColis.Shipping.Infrastructure.Authentication.Constants;
 
 public static class RolePermissionsConstants
 {
-    public static readonly ImmutableArray<RolePermission> ClientPermissions = new()
+    public static readonly List<RolePermission> _clientPermissions = new()
         {
             CreateRolePermission(RoleConstants.Client, PermissionConstants.CreateShipping),
             CreateRolePermission(RoleConstants.Client, PermissionConstants.UpdateShipping),
@@ -18,7 +18,7 @@ public static class RolePermissionsConstants
 
         };
 
-    public static readonly ImmutableArray<RolePermission> CarrierPermissions = new()
+    public static readonly List<RolePermission> _carrierPermissions = new()
         {
             CreateRolePermission(RoleConstants.Carrier, PermissionConstants.ReadShipping),
 
@@ -35,6 +35,10 @@ public static class RolePermissionsConstants
             CreateRolePermission(RoleConstants.Carrier, PermissionConstants.ReadPerson)
 
         };
+
+    public static readonly ImmutableArray<RolePermission> ClientPermissions = _clientPermissions.ToImmutableArray();
+
+    public static readonly ImmutableArray<RolePermission> CarrierPermissions = _carrierPermissions.ToImmutableArray();
 
     public static readonly ImmutableList<RolePermission> SuperAdminPermissions = Enum.GetValues<PermissionConstants>().Select(x=> CreateRolePermission(RoleConstants.SuperAdmin,x)).ToImmutableList();
 

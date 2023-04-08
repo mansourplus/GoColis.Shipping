@@ -28,7 +28,7 @@ public static class RelayPointEndPoints
                     );
 
             })
-            .RequireAuthorization()
+            //.RequireAuthorization()
             .CustomProduces<Guid>(201);
 
         app.MapGet("/api/relaypoint/{id}",

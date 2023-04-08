@@ -54,7 +54,7 @@ public static class DependencyInjection
     public static IServiceScope MigrateDatabase(this IServiceScope scope)
     {
         using var db = scope.ServiceProvider.GetService<DatabaseContext>();
-        db!.Database.Migrate();
+        db?.Database?.Migrate();
 
         return scope;
     }

@@ -1,38 +1,49 @@
 using GoColis.Shipping.Api.Logistics.RelayPoint.Requests.Create;
-using Microsoft.AspNetCore.Mvc.Testing;
+using GoColis.Shipping.Application.Authentication.Constants;
+using GoColis.Shipping.Domain.Authentication.Entities;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Newtonsoft.Json.Linq;
 using System.Net;
+using System.Security.Cryptography;
 //using Microsoft.AspNetCore.Mvc.Testing;
 //using Microsoft.VisualStudio.TestPlatform.TestHost;
 //using System.Net;
 
-namespace GoColis.Shipping.Api.IntegrationTests
+namespace GoColis.Shipping.Api.IntegrationTests;
+
+public class UnitTest1 : BaseIntegrationTest
 {
-    public class UnitTest1
+    [Fact]
+    public async Task Test1()
     {
-        [Fact]
-        public async Task Test1()
+        // Arrange
+        var payload = new CreateRelayPointDto
         {
-            // Arrange
-            var payload = new CreateRelayPointDto
+            Name = "Test",
+            Adress = new Logistics.Common.AdressDto
             {
-                Name = "Test",
-                Adress = new Logistics.Common.AdressDto
-                {
-                    AddressLine1 = "Test"
-                },
-                Contact = new Logistics.Common.ContactDto
-                {
-                    Email= "Test",
-                }
-            };
-            await using var application = new WebApplicationFactory<Program>();
-            using var client = application.CreateClient();
+                AddressLine1 = "Test"
+            },
+            Contact = new Logistics.Common.ContactDto
+            {
+                Email = "Test@mail.fr",
+                Phone="5555555555555555",
+                Role = "Test"
 
-            // Act
-            var result = await client.PostAsJsonAsync("/api/relaypoint", payload);
+            }
+        };
+        using var client = await CreateClient();
 
-            // Assert
-            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-        }
+
+        // Act
+        var result = await client.PostAsJsonAsync("/api/relaypoint", payload);
+
+        var resultString = await result.Content.ReadAsStringAsync();
+
+        Console.WriteLine(resultString);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.Created, result.StatusCode);
     }
 }

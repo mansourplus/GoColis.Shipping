@@ -12,14 +12,14 @@ public static class RoleConstants
         NormalizedName = Application.Authentication.Constants.Roles.Client.ToUpper(),
     };
 
-    public static readonly Role Carrier = new ()
+    public static readonly Role Carrier = new()
     {
         Id = new Guid("01b71ba4-6e58-4758-97a9-f4d6d90d7eb9"),
         Name = Application.Authentication.Constants.Roles.Carrier,
         NormalizedName = Application.Authentication.Constants.Roles.Carrier.ToUpper(),
     };
 
-    public static readonly Role SuperAdmin = new ()
+    public static readonly Role SuperAdmin = new()
     {
         Id = new Guid("133ff856-2792-413d-a467-3dd774c6f040"),
         Name = Application.Authentication.Constants.Roles.SuperAdmin,
@@ -27,22 +27,25 @@ public static class RoleConstants
     };
 
 
-    public static readonly ImmutableArray<Permission> ClientPermissions = new()
-        {
-            CreateRolePermission( PermissionConstants.CreateShipping),
-            CreateRolePermission( PermissionConstants.UpdateShipping),
-            CreateRolePermission( PermissionConstants.DeleteShipping),
-            CreateRolePermission( PermissionConstants.ReadShipping),
+    private static List<Permission> _clientPermision = new(){
 
-            CreateRolePermission( PermissionConstants.ReadCarrier),
-            CreateRolePermission( PermissionConstants.ReadRelayPoint),
-            CreateRolePermission( PermissionConstants.ReadPerson)
+            CreateRolePermission(PermissionConstants.CreateShipping),
+            CreateRolePermission(PermissionConstants.UpdateShipping),
+            CreateRolePermission(PermissionConstants.DeleteShipping),
+            CreateRolePermission(PermissionConstants.ReadShipping),
+
+            CreateRolePermission(PermissionConstants.ReadCarrier),
+            CreateRolePermission(PermissionConstants.ReadRelayPoint),
+            CreateRolePermission(PermissionConstants.ReadPerson)
 
         };
 
-    public static readonly ImmutableArray<Permission> CarrierPermissions = new()
-        {
-            CreateRolePermission( PermissionConstants.ReadShipping),
+    public static readonly ImmutableArray<Permission> ClientPermissions = _clientPermision.ToImmutableArray();
+
+
+    private static List<Permission> _carrierPermissions = new(){
+
+             CreateRolePermission( PermissionConstants.ReadShipping),
 
             CreateRolePermission( PermissionConstants.ReadCarrier),
             CreateRolePermission( PermissionConstants.CreateCarrier),
@@ -58,10 +61,12 @@ public static class RoleConstants
 
         };
 
-    public static readonly ImmutableList<Permission> SuperAdminPermissions = Enum.GetValues<PermissionConstants>().Select(CreateRolePermission).ToImmutableList();
+    public static readonly ImmutableArray<Permission> CarrierPermissions = _carrierPermissions.ToImmutableArray();
+
+    public static readonly ImmutableArray<Permission> SuperAdminPermissions = Enum.GetValues<PermissionConstants>().Select(CreateRolePermission).ToImmutableArray();
 
 
-    private static Permission CreateRolePermission( PermissionConstants permission)
+    private static Permission CreateRolePermission(PermissionConstants permission)
     {
         return new Permission()
         {
