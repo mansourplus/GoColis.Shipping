@@ -42,16 +42,41 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+       # Checkout the repo
+      - uses: actions/checkout@main
+      
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
         with:
-          name: .net-app
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
+          dotnet-version: '7.x'
+          include-prerelease: true
+      
+      # Run dotnet build and publish
+      - name: dotnet build and publish
+        run: |
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet publish -c Release --property:PublishDir='${{ env.DOTNET_ROOT }}/myapp' 
+          
+      # Deploy to Azure Web apps
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'GoColisApi'
-          slot-name: 'Production'
+        with: 
+          app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_440BF7B541AE4BA08D4C21943EC71ACD }}
-          package: ${{env.DOTNET_ROOT}}/myapp
+          package: '${{ env.DOTNET_ROOT }}/myapp'
+          
+#      - name: Download artifact from build job
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: .net-app
+#
+#      - name: Deploy to Azure Web App
+#        id: deploy-to-webapp
+#        uses: azure/webapps-deploy@v2
+#        with:
+#          app-name: 'GoColisApi'
+#          slot-name: 'Production'
+#          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_440BF7B541AE4BA08D4C21943EC71ACD }}
+#          package: .
