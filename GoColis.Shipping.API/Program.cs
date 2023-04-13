@@ -34,7 +34,7 @@ builder.Services.AddAuth(builder.Configuration);
 var app = builder.Build();
 
 
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerDocumentation();
 }
