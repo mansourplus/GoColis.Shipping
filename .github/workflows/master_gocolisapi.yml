@@ -54,4 +54,4 @@ jobs:
           app-name: 'GoColisApi'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_440BF7B541AE4BA08D4C21943EC71ACD }}
-          package: .
+          package: ${{env.DOTNET_ROOT}}/myapp
