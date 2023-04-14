@@ -24,7 +24,7 @@ public record CreateShipmentCommand: IRequest<ErrorOr<Guid>>
     public virtual Order ToShipment(Person person, string createdBy)
     {
         return Order.Create(
-            person.Id,
+            person.User.Id,
             IsShipper,
             WithInsurance,
             FromPickupDate,

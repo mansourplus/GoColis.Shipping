@@ -11,7 +11,26 @@ namespace GoColis.Shipping.Api.Authentication;
 
 public static class LoginEndPoints
 {
+    private const string TAG = "Authentication";
     public static void MapAuthenticationEndPoints(this WebApplication app)
+    {
+
+        app.Login();
+
+        //app.MapPost("/auth/logout",
+        //   async (IMediator _mediator, ILogger<LogoutCommand> _logger) =>
+        //   {
+        //       var result = _mediator.Send(new LogoutCommand());
+        //       return await result.Match(
+        //           success => Results.Ok(),
+        //           failed => failed.ToResult(_logger)
+        //           );
+        //   });
+
+        app.Register();
+    }
+
+    internal static void Login(this WebApplication app)
     {
 
         app.MapPost("/auth/login",
@@ -25,17 +44,13 @@ public static class LoginEndPoints
                     success => Results.Ok(success),
                     failed => failed.ToResult(_logger)
                     );
-            });
+            })
+            .WithTags(TAG)
+            .AddSummary("Login");
+    }
 
-        app.MapPost("/auth/logout",
-           async (IMediator _mediator, ILogger<LogoutCommand> _logger) =>
-           {
-               var result = _mediator.Send(new LogoutCommand());
-               return await result.Match(
-                   success => Results.Ok(),
-                   failed => failed.ToResult(_logger)
-                   );
-           });
+    internal static void Register(this WebApplication app)
+    {
 
         app.MapPost("/auth/register",
             async (RegisterDto request, IMediator _mediator, ILogger<LoginCommand> _logger, IMapper _mapper) =>
@@ -49,6 +64,8 @@ public static class LoginEndPoints
                     failed => failed.ToResult(_logger)
                     );
 
-            });
+            })
+            .WithTags(TAG)
+            .AddSummary("Register");
     }
 }

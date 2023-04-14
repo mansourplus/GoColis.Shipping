@@ -12,10 +12,25 @@ namespace GoColis.Shipping.Api.Logistics;
 
 public static class ShipmentendPoints
 {
+    private const string TAG = "Orders";
+
+
     public static void MapShipmentEndPoints(this WebApplication app)
     {
 
-        app.MapPost("/api/shipments",
+        app.AddOrder();
+
+        app.GetOrder();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="app"></param>
+    public static void AddOrder(this WebApplication app)
+    {
+
+        app.MapPost("/api/orders",
             async (CreateShipmentDto request, IMediator _mediator, ILogger<CreateShipmentCommand> _logger, IMapper _mapper) =>
             {
                 var command = _mapper.Map<CreateShipmentCommand>(request);
@@ -24,17 +39,26 @@ public static class ShipmentendPoints
                 var result = _mediator.Send(command);
 
                 return await result.Match(
-                    success => Results.Created($"/api/shipments/{success}", success),
+                    success => Results.Created($"/api/orders/{success}", success),
                     failed => failed.ToResult(_logger)
                     );
 
             })
+            .AddSummary("Create order")
             .RequireAuthorization("permission")
             .CustomProduces<Guid>(201)
-            .WithTags(PermissionConstants.CreateShipping.ToString())
-            ; 
+            .WithTags(TAG, PermissionConstants.CreateShipping.ToString())
+            ;
+    }
 
-        app.MapGet("/api/shipments/{id}",
+   
+    public static void GetOrder(this WebApplication app)
+    {
+        /// <summary>
+        /// testetsetetdsdqsdjlk
+        /// </summary>
+        /// <param name="app"></param>
+        app.MapGet("/api/orders/{id}",
             async (Guid id, IMediator _mediator, ILogger<GetShipmentQuery> _logger, IMapper _mapper) =>
             {
                 var result = _mediator.Send(new GetShipmentQuery(id, app.GetUserId()));
@@ -43,7 +67,10 @@ public static class ShipmentendPoints
                     success => Results.Ok(_mapper.Map<GetShipmentDto>(success)),
                     failed => failed.ToResult(_logger)
                     );
-            }).RequireAuthorization()
+            })
+            .AddSummary("Get Order")
+            .RequireAuthorization()
+            .WithTags(TAG)
             .CustomProduces<GetShipmentDto>(200)
             ;
     }

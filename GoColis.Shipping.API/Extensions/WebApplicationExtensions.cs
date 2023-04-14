@@ -1,4 +1,5 @@
 ﻿using GoColis.Shipping.Api.Common.Dtos;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace GoColis.Shipping.Api.Extensions;
 
@@ -20,9 +21,13 @@ public static class WebApplicationExtensions
             .Produces<ErrorDto>(400)
             .Produces(401)
             .Produces<ErrorDto>(404)
-            .Produces<ErrorDto>(500);
+            .Produces<ErrorDto>(500)
+            ;
 
     }
 
-
+    internal static RouteHandlerBuilder AddSummary(this RouteHandlerBuilder app,string summary, string? description=null)
+    {
+        return app.WithMetadata(new SwaggerOperationAttribute(summary, description ?? summary));
+    }
 }

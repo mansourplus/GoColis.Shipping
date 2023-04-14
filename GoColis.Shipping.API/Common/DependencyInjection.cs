@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 
 namespace GoColis.Shipping.Api.Common;
@@ -103,6 +104,26 @@ public static class DependencyInjection
                 }
             });
 
+            config.SwaggerDoc("v1",
+                new OpenApiInfo
+                {
+                    Title = "GoColis Documentation",
+                    Version = "v1",
+                    //TODO
+                    Description = "This is a demo to see how documentation can easily be generated for ASP.NET Core Web APIs using Swagger and ReDoc.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Mansour BEN MOHAMED",
+                        Email = "benmedmansour@gmail.com"
+                    }
+                });
+
+            config.EnableAnnotations();
+
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            config.IncludeXmlComments(xmlPath);
+
         });
         return services;
     }
@@ -110,7 +131,16 @@ public static class DependencyInjection
     public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app)
     {
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(options =>
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json",
+                    "GoColis Documentation")
+                    );
+
+        app.UseReDoc(options =>
+        {
+            options.DocumentTitle = "GoColis Documentation";
+            options.SpecUrl = "/swagger/v1/swagger.json";
+        });
 
         return app;
     }

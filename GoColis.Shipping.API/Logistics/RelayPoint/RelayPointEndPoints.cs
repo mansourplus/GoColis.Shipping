@@ -11,7 +11,16 @@ namespace GoColis.Shipping.Api.Logistics.RelayPoint;
 
 public static class RelayPointEndPoints
 {
+    private const string TAG = "Relaypoint";
     public static void MapRelayPointEndPoints(this WebApplication app)
+    {
+
+        app.AddRelayPoint();
+
+        app.GetRelayPoint();
+    }
+
+    internal static void AddRelayPoint(this WebApplication app)
     {
 
         app.MapPost("/api/relaypoint",
@@ -28,8 +37,14 @@ public static class RelayPointEndPoints
                     );
 
             })
-            //.RequireAuthorization()
+            .AddSummary("Add relaypoint")
+            .WithTags(TAG)
+            .RequireAuthorization()
             .CustomProduces<Guid>(201);
+    }
+
+    internal static void GetRelayPoint(this WebApplication app)
+    {
 
         app.MapGet("/api/relaypoint/{id}",
             async (Guid id, IMediator _mediator, ILogger<GetRelayPointQuery> _logger, IMapper _mapper) =>
@@ -41,6 +56,8 @@ public static class RelayPointEndPoints
                     failed => failed.ToResult(_logger)
                     );
             })
+            .AddSummary("Get relaypoint")
+            .WithTags(TAG)
             .RequireAuthorization()
             .CustomProduces<GetRelayPointDto>(200);
     }

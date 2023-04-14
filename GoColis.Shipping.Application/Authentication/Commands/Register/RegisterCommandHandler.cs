@@ -56,9 +56,6 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<b
             {
                 error = identity1?.Errors?.FirstOrDefault()?.Description ?? string.Empty;
             }
-
-            //Roleback if persting problems
-            await _userManager.DeleteAsync(user);
         }
         else
         {
@@ -75,8 +72,11 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<b
             };
         }
 
-        if (!string.IsNullOrEmpty(error))
+        if (!string.IsNullOrWhiteSpace(error))
         {
+            //Roleback if persting problems
+            await _userManager.DeleteAsync(user);
+
             return ErrorOr.Failure<bool>(Error.Validation("RegisterCommand.Save", error));
         }
 
