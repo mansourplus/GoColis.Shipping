@@ -3,6 +3,7 @@ using GoColis.Shipping.Api.Extensions;
 using GoColis.Shipping.Application.Authentication.Commands.Login;
 using GoColis.Shipping.Application.Authentication.Commands.Logout;
 using GoColis.Shipping.Application.Authentication.Commands.Register;
+using GoColis.Shipping.Infrastructure.Authentication.Constants;
 using MapsterMapper;
 using MediatR;
 using Owls.ErrorOr.Core;
@@ -27,7 +28,8 @@ public static class LoginEndPoints
         //           );
         //   });
 
-        app.Register();
+        app.RegisterCarrier();
+        app.RegisterCustomer();
     }
 
     internal static void Login(this WebApplication app)
@@ -49,23 +51,44 @@ public static class LoginEndPoints
             .AddSummary("Login");
     }
 
-    internal static void Register(this WebApplication app)
+    internal static void RegisterCarrier(this WebApplication app)
     {
 
-        app.MapPost("/auth/register",
+        app.MapPost("/auth/register/carrier",
             async (RegisterDto request, IMediator _mediator, ILogger<LoginCommand> _logger, IMapper _mapper) =>
             {
-                var command = _mapper.Map<RegisterCommand>(request);
-
-                var result = _mediator.Send(command);
-
-                return await result.Match(
-                    success => Results.Created("/auth/login", success),
-                    failed => failed.ToResult(_logger)
-                    );
+                return await Register(request, _mediator, _logger, _mapper, Application.Authentication.Constants.Roles.Carrier);
 
             })
             .WithTags(TAG)
             .AddSummary("Register");
+    }
+
+    internal static void RegisterCustomer(this WebApplication app)
+    {
+
+        app.MapPost("/auth/register/Customer",
+            async (RegisterDto request, IMediator _mediator, ILogger<LoginCommand> _logger, IMapper _mapper) =>
+            {
+                return await Register(request, _mediator, _logger, _mapper, Application.Authentication.Constants.Roles.Customer);
+
+            })
+            .WithTags(TAG)
+            .AddSummary("Register");
+    }
+
+    internal static async Task<IResult> Register(RegisterDto request, IMediator _mediator, ILogger<LoginCommand> _logger, IMapper _mapper, string role)
+    {
+        var command = _mapper.Map<RegisterCommand>(request);
+
+        command.Role = role;
+
+
+        var result = _mediator.Send(command);
+
+        return await result.Match(
+            success => Results.Created("/auth/login", success),
+            failed => failed.ToResult(_logger)
+            );
     }
 }

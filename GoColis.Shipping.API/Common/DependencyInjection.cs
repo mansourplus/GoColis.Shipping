@@ -24,10 +24,10 @@ public static class DependencyInjection
     public static void AddAuth(this IServiceCollection services, IConfiguration Configuration)
     {
         var jwtOptions = new JwtOptions();
-        Configuration.Bind(nameof(JwtOptions),jwtOptions);
+        Configuration.Bind(nameof(JwtOptions), jwtOptions);
 
         services.AddSingleton(Options.Create(jwtOptions));
-        services.AddSingleton<IAuthorizationHandler,PermissionAuthorizationHandler>();
+        services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
         services.AddIdentity<User, Role>()
             .AddUserStore<UserStore<User, Role, DatabaseContext, Guid, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>>()
@@ -63,12 +63,11 @@ public static class DependencyInjection
                ValidAudiences = jwtOptions.ValidAudiences,
                ValidIssuer = jwtOptions.ValidIssuer,
                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
-               
-               
+
+
            };
        });
     }
-
 
     public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
     {
@@ -154,4 +153,15 @@ public static class DependencyInjection
         return app;
     }
 
+
+    public static void AddPagination(this IServiceCollection services)
+    {
+        services.AddSingleton<IUriService>(o =>
+        {
+            var accessor = o.GetRequiredService<IHttpContextAccessor>();
+            var request = accessor.HttpContext!.Request;
+            var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+            return new UriService(uri);
+        });
+    }
 }

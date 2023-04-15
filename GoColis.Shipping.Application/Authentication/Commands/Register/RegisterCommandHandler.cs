@@ -66,7 +66,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<b
         {
             error = request.Role switch
             {
-                Roles.Client => await RegisterClient(request, user),
+                Roles.Customer => await RegisterClient(request, user),
                 Roles.Carrier => await RegisterCarrier(request, user),
                 _ => string.Empty
             };

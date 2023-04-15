@@ -16,10 +16,10 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
         }
         var endpoint = httpctx.GetEndpoint()!;
 
-        var tags = endpoint.Metadata.OfType<TagsAttribute>()
-            .SelectMany(x => x.Tags);
+        var permissions = endpoint.Metadata.OfType<PermissionsAttribute>()
+            .SelectMany(x => x.Permissions);
 
-        if(tags is null || !tags.Any())
+        if(permissions is null || !permissions.Any())
         {
             context.Succeed(requirement);
             return;
@@ -39,7 +39,7 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
 
         var permission = await _permissionRepository.GetUserPermission(new Guid(userid));
 
-        if(tags.Any(x=> permission.Any(p=>p.Name == x)))
+        if(permissions.Any(x=> permission.Any(p=>p.Name == x)))
         {
             context.Succeed(requirement);
             return ;

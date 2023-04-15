@@ -8,8 +8,8 @@ public static class RoleConstants
     public static readonly Role Client = new()
     {
         Id = new Guid("8167af27-1021-4e57-bf4c-b40dd754567f"),
-        Name = Application.Authentication.Constants.Roles.Client,
-        NormalizedName = Application.Authentication.Constants.Roles.Client.ToUpper(),
+        Name = Application.Authentication.Constants.Roles.Customer,
+        NormalizedName = Application.Authentication.Constants.Roles.Customer.ToUpper(),
     };
 
     public static readonly Role Carrier = new()

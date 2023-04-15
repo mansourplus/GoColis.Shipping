@@ -1,4 +1,5 @@
-﻿using GoColis.Shipping.Application.Logistics.Contracts;
+﻿using GoColis.Shipping.Application.Common;
+using GoColis.Shipping.Application.Logistics.Contracts;
 using GoColis.Shipping.Domain.Logistics.Order;
 using GoColis.Shipping.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
@@ -24,13 +25,36 @@ public class ShipmentRepository : Repository, IShipmentRepository
     {
         var entity = await DbContext.Shipments
             .Include(x=>x.Insurance)
-            .AsSplitQuery()
+            .Include(x=>x.Sender)
+            .Include(x=>x.Receiver)
+            .Include(x=>x.RelayPoint)
+            .Include(x=>x.PickupPoint)
+            //.AsSplitQuery()
             .FirstOrDefaultAsync(x => x.Id == id);
 
+       return entity;
+    }
 
-        if (entity == null)
-            return default;
+    public async Task<PagedQueryResponse<List<Order>>> GetPaginatedListAsync(int pageSize, int pageNumber, Guid? ownerId)
+    {
+        var list = await DbContext.Shipments
+            //.Include(x => x.Insurance)
+            .Include(x => x.Sender)
+            .Include(x => x.Receiver)
+            //.Include(x => x.RelayPoint)
+            //.Include(x => x.PickupPoint)
+            .Where(x=> !ownerId.HasValue || x.OwnerId == ownerId)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            //.AsSplitQuery()
+            .ToListAsync()
+            ;
 
-        return entity;
+        var response= new PagedQueryResponse<List<Order>>(list);
+
+        response.TotalRecords = await DbContext.Shipments.CountAsync();
+
+
+        return response;
     }
 }

@@ -30,6 +30,7 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 }));
 
 builder.Services.AddAuth(builder.Configuration);
+builder.Services.AddPagination();
 
 var app = builder.Build();
 
